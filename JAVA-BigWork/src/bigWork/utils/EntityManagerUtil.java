@@ -8,38 +8,38 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-//µÃµ½entity managerµÄ¹¤¾ßÀà
+//ï¿½Ãµï¿½entity managerï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½
 public class EntityManagerUtil {
 	static EntityManagerFactory entityManagerFactory;
 	static EntityManager entityManager;
 	static EntityTransaction transaction;
 	public static EntityManager getEntityManager(){
-		//1. ´´½¨ EntitymanagerFactory
+		//1. ï¿½ï¿½ï¿½ï¿½ EntitymanagerFactory
 		String persistenceUnitName = "jpa-1";
 		
 		Map<String, Object> properites = new HashMap<String, Object>();
 		properites.put("hibernate.show_sql",true);
-		
+	
 		entityManagerFactory = 
-				//Persistence.createEntityManagerFactory(persistenceUnitName);
-				Persistence.createEntityManagerFactory(persistenceUnitName, properites);
+				Persistence.createEntityManagerFactory(persistenceUnitName);
+//				Persistence.createEntityManagerFactory(persistenceUnitName, properites);
 				
-		//2. ´´½¨ EntityManager. ÀàËÆÓÚ Hibernate µÄ SessionFactory
+		//2. ï¿½ï¿½ï¿½ï¿½ EntityManager. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Hibernate ï¿½ï¿½ SessionFactory
 		entityManager = entityManagerFactory.createEntityManager();
 		
-		//3. ¿ªÆôÊÂÎñ
+		//3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		transaction = entityManager.getTransaction();
 		transaction.begin();
 		return entityManager;
 	}
 	public static void closeEntityManager(){
-		//5. Ìá½»ÊÂÎñ
+		//5. ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		transaction.commit();
 		
-		//6. ¹Ø±Õ EntityManager
+		//6. ï¿½Ø±ï¿½ EntityManager
 		entityManager.close();
 		
-		//7. ¹Ø±Õ EntityManagerFactory
+		//7. ï¿½Ø±ï¿½ EntityManagerFactory
 		entityManagerFactory.close();
 	}
 
